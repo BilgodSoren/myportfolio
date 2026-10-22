@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Copy, 
-  Send, 
-  CheckCircle2, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Copy,
+  Send,
+  CheckCircle2,
   MessageSquare,
 } from 'lucide-react';
+import { motion } from 'motion/react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import confetti from 'canvas-confetti';
 import { PERSONAL_INFO } from '../data/portfolioData';
@@ -35,8 +36,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-      
-      // Trigger festive celebration confetti
+
       try {
         confetti({
           particleCount: 80,
@@ -52,33 +52,46 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
   return (
     <section id="contact" className="contact-section">
       <div className="container">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="section-badge">
             <MessageSquare size={14} />
             <span>Get In Touch</span>
           </div>
           <h2 className="section-title">
-            Let's Build Something Exceptional
+            Let's Connect
           </h2>
           <p className="section-subtitle">
-            Whether you have an open Frontend / React developer role, a freelance inquiry, or just want to discuss web engineering — my inbox is always open.
+            Feel free to reach out for frontend opportunities, collaborations, or questions.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="contact-box">
+        <motion.div 
+          className="contact-box"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6 }}
+        >
           {/* Left Column: Direct Info */}
           <div className="contact-info-left">
-            <h2>Let's talk about your next project.</h2>
+            <h2>Let's talk about opportunities.</h2>
             <p>
-              Available for full-time frontend engineering roles and global remote contracts. Let's connect and create intuitive, high-performance web products together.
+              Available for full-time frontend developer roles and remote opportunities. Let's build clean, high-performance web applications together.
             </p>
 
             <div className="contact-direct-items">
               {/* Email Button */}
-              <button
+              <motion.button
                 type="button"
                 className="contact-item-btn"
                 onClick={() => onCopyText(PERSONAL_INFO.email, 'Email address')}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                   <div style={{
@@ -101,13 +114,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                 <span className="contact-copy-badge">
                   <Copy size={12} style={{ marginRight: '4px' }} /> Copy
                 </span>
-              </button>
+              </motion.button>
 
               {/* Phone Button */}
-              <button
+              <motion.button
                 type="button"
                 className="contact-item-btn"
                 onClick={() => onCopyText(PERSONAL_INFO.phone, 'Phone number')}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                   <div style={{
@@ -130,17 +145,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                 <span className="contact-copy-badge">
                   <Copy size={12} style={{ marginRight: '4px' }} /> Copy
                 </span>
-              </button>
+              </motion.button>
 
-              {/* Location Card */}
+              {/* Location Badge */}
               <div className="contact-item-btn" style={{ cursor: 'default' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                   <div style={{
                     width: '38px',
                     height: '38px',
                     borderRadius: '10px',
-                    background: '#F0F9FF',
-                    color: '#0284C7',
+                    background: '#F1F5F9',
+                    color: '#64748B',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -148,73 +163,73 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <div className="contact-item-label">Location</div>
+                    <div className="contact-item-label">Current Base</div>
                     <div className="contact-item-val">{PERSONAL_INFO.location}</div>
                   </div>
                 </div>
-                <span style={{ fontSize: '0.78rem', color: '#10B981', fontWeight: 700 }}>
-                  Remote Ready
+                <span style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 600 }}>
+                  Open to Relocation
                 </span>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-                style={{ fontSize: '0.88rem', padding: '0.6rem 1.2rem' }}
-              >
-                <GithubIcon size={16} />
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-                style={{ fontSize: '0.88rem', padding: '0.6rem 1.2rem' }}
-              >
-                <LinkedinIcon size={16} style={{ color: '#0A66C2' }} />
-                <span>LinkedIn</span>
-              </a>
+            {/* Social Channels */}
+            <div>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.85rem' }}>
+                Connect on Social Networks
+              </div>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <motion.a
+                  href={PERSONAL_INFO.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-icon-btn"
+                  title="GitHub Profile"
+                  whileHover={{ y: -3, scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <GithubIcon size={18} />
+                </motion.a>
+                <motion.a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-icon-btn"
+                  title="LinkedIn Profile"
+                  whileHover={{ y: -3, scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <LinkedinIcon size={18} />
+                </motion.a>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
-          <div>
+          {/* Right Column: Interactive Contact Form */}
+          <div className="contact-form-right">
             {submitted ? (
-              <div style={{
-                background: '#ECFDF5',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                borderRadius: '16px',
-                padding: '2.5rem',
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem'
-              }}>
+              <motion.div 
+                className="form-success-card"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+              >
                 <div style={{
-                  width: '54px',
-                  height: '54px',
+                  width: '56px',
+                  height: '56px',
                   borderRadius: '50%',
-                  background: '#10B981',
-                  color: '#FFFFFF',
+                  background: '#ECFDF5',
+                  color: '#10B981',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  marginBottom: '1rem'
                 }}>
                   <CheckCircle2 size={32} />
                 </div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#064E3B' }}>
-                  Message Sent Successfully!
-                </h3>
-                <p style={{ color: '#065F46', fontSize: '0.95rem', maxWidth: '380px' }}>
-                  Thank you for reaching out, <strong>{formData.name}</strong>. I will review your note and respond back to <strong>{formData.email}</strong> promptly!
+                <h3>Message Received!</h3>
+                <p>
+                  Thank you, <strong>{formData.name}</strong>. I've received your note and will get back to you shortly at <strong>{formData.email}</strong>.
                 </p>
                 <button
                   type="button"
@@ -223,11 +238,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                     setFormData({ name: '', email: '', subject: '', message: '' });
                   }}
                   className="btn-secondary"
-                  style={{ marginTop: '0.5rem', background: '#FFFFFF' }}
+                  style={{ marginTop: '1.25rem', padding: '0.55rem 1.25rem' }}
                 >
-                  Send Another Message
+                  Send Another Note
                 </button>
-              </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
@@ -236,7 +251,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                     id="name"
                     type="text"
                     required
-                    placeholder="e.g. Alex Johnson"
+                    placeholder="Alex Morgan"
                     className="form-input"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -257,11 +272,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="subject">Subject / Project Type</label>
+                  <label className="form-label" htmlFor="subject">Subject / Role</label>
                   <input
                     id="subject"
                     type="text"
-                    placeholder="e.g. Frontend Developer Role / Web Project"
+                    placeholder="Frontend Developer Role / Opportunity"
                     className="form-input"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
@@ -280,18 +295,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyText }) =>
                   />
                 </div>
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={loading}
                   className="submit-btn"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Send size={16} />
                   <span>{loading ? 'Sending Message...' : 'Send Message'}</span>
-                </button>
+                </motion.button>
               </form>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

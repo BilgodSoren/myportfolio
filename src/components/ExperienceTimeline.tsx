@@ -1,26 +1,41 @@
+import React from 'react';
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import { WORK_EXPERIENCE } from '../data/portfolioData';
 
 export const ExperienceTimeline: React.FC = () => {
   return (
     <section id="experience" className="experience-section">
       <div className="container">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="section-badge">
             <Briefcase size={14} />
             <span>Practical Experience</span>
           </div>
           <h2 className="section-title">
-            Internship & Hands-on Exposure
+            Internship & Practical Experience
           </h2>
           <p className="section-subtitle">
-            Frontend developer internship at Zedgoo, engineering reusable UI components, collaborating with cross-functional teams, and optimizing web navigation flows.
+            Frontend developer internship at Zedgoo, engineering reusable UI components and collaborating in Git team workflows.
           </p>
-        </div>
+        </motion.div>
 
         <div className="timeline-wrapper">
           {WORK_EXPERIENCE.map((exp, idx) => (
-            <div key={idx} className="timeline-card">
+            <motion.div 
+              key={idx} 
+              className="timeline-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            >
               <div className="timeline-card-header">
                 <div>
                   <h3 className="role-title">{exp.role}</h3>
@@ -42,10 +57,17 @@ export const ExperienceTimeline: React.FC = () => {
 
               <ul className="timeline-bullet-list">
                 {exp.description.map((point, pIdx) => (
-                  <li key={pIdx} className="timeline-bullet-item">
+                  <motion.li 
+                    key={pIdx} 
+                    className="timeline-bullet-item"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.1 + pIdx * 0.08 }}
+                  >
                     <CheckCircle2 size={16} style={{ color: '#4F46E5', marginTop: '3px', flexShrink: 0 }} />
                     <span>{point}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
@@ -66,7 +88,7 @@ export const ExperienceTimeline: React.FC = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

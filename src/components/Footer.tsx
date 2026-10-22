@@ -25,9 +25,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
           </div>
 
           <div className="footer-links">
-            <button 
-              type="button" 
-              onClick={onOpenResume} 
+            <button
+              type="button"
+              onClick={onOpenResume}
               style={{ fontSize: '0.88rem', color: '#64748B', fontWeight: 600, cursor: 'pointer' }}
             >
               Resume
